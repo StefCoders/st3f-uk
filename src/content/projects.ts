@@ -22,6 +22,6 @@ export const projects: Project[] = [
 		name: "st3f.uk blog",
 		description: "My personal site for projects, updates, and experiments.",
 		url: "/blog",
-		image: "/projects/stef.png"
+		image: "/stef.png"
 	}
 ];
