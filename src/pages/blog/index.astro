@@ -16,100 +16,80 @@ const posts = (await getCollection('blog')).sort(
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
         <style>
-            /* 1. Grid Layout */
+            /* Simple, Minimalist Vertical List */
             .blog-list {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
-            }
-
-            /* 2. Featured Post Styling */
-            .blog-list li:first-child {
-                grid-column: 1 / -1;
-                margin-bottom: 2rem;
-            }
-
-            .blog-list li:first-child .card {
                 display: flex;
                 flex-direction: column;
-                padding: 2rem;
-                background: rgba(0, 163, 255, 0.05); /* Slight blue tint for featured */
-                border-color: rgba(0, 163, 255, 0.2);
+                gap: 1.5rem; /* Space between posts */
             }
 
-            @media (min-width: 720px) {
-                .blog-list li:first-child .card {
-                    flex-direction: row;
-                    align-items: center;
-                    gap: 3rem;
-                }
-                .blog-list li:first-child .featured-img-wrapper {
-                    width: 60%;
-                }
-                .blog-list li:first-child .content {
-                    width: 40%;
-                }
-            }
-
-            /* 3. Image Handling */
-            .img-wrapper {
-                overflow: hidden;
-                border-radius: 12px;
-                line-height: 0;
-            }
-
-            img {
-                width: 100%;
-                height: auto;
-                transition: transform 0.5s ease;
-                object-fit: cover;
-                aspect-ratio: 16 / 9;
-            }
-
-            .post-link:hover img {
-                transform: scale(1.03);
-            }
-
-            /* 4. Content Styling */
-            .post-link {
+            .post-item {
+                display: block;
                 text-decoration: none;
                 color: inherit;
             }
 
-            .content {
-                padding-top: 1.5rem;
+            /* The 'Card' is now just a subtle text container */
+            .card {
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.2s ease;
             }
 
+            .post-item:hover .card {
+                transform: translateX(4px); /* Subtle shift rather than scaling */
+                border-color: var(--accent);
+            }
+
+            /* Image is now treated as a simple inline element */
+            img {
+                width: 100%;
+                height: auto; /* Natural scale */
+                display: block;
+                border-radius: 8px; /* Slightly tighter border */
+                margin-bottom: 1rem;
+                border: 1px solid var(--glass-border);
+            }
+
+            /* Content Styling */
             .title {
-                margin: 0.5rem 0;
-                font-size: 1.5rem;
+                margin: 0.25rem 0 0.5rem 0;
+                font-size: 1.75rem; /* Larger, readable titles */
                 color: var(--text-bright);
+                line-height: 1.2;
+                letter-spacing: -0.01em;
                 transition: color 0.2s ease;
             }
 
-            .post-link:hover .title {
+            .post-item:hover .title {
                 color: var(--accent);
             }
 
             .date {
-                font-size: 0.85rem;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                color: var(--accent); /* Blue highlight for dates */
+                font-size: 0.9rem;
+                font-weight: 700;
+                color: var(--accent); /* Electric Blue highlight */
             }
 
-            /* 5. Mobile Adjustments */
+            .description {
+                margin: 0;
+                color: var(--text-muted);
+                line-height: 1.6;
+                font-size: 1rem;
+            }
+
+            /* Clean break for featured (optional, keeps it simple) */
+            .blog-list li:first-child .card {
+                background: rgba(0, 163, 255, 0.03); /* Barely-there blue tint */
+            }
+
             @media (max-width: 720px) {
-                .blog-list {
-                    grid-template-columns: 1fr;
-                    gap: 1.5rem;
-                }
-                .title {
-                    font-size: 1.25rem;
-                }
+                .title { font-size: 1.4rem; }
+                .card { padding: 1.25rem; }
             }
         </style>
     </head>
@@ -126,24 +106,23 @@ const posts = (await getCollection('blog')).sort(
                     {
                         posts.map((post) => (
                             <li>
-                                <a href={`/blog/${post.id}/`} class="post-link">
+                                <a href={`/blog/${post.id}/`} class="post-link post-item">
                                     <article class="card">
-                                        <div class="img-wrapper featured-img-wrapper">
+                                        {/* Image is now a simple, raw element */}
+                                        {post.data.heroImage && (
                                             <img 
-                                                width={720} 
-                                                height={360} 
                                                 src={post.data.heroImage} 
                                                 alt="" 
-                                                loading="lazy"
+                                                loading="lazy" 
                                             />
-                                        </div>
+                                        )}
+                                        
                                         <div class="content">
                                             <span class="date">
                                                 <FormattedDate date={post.data.pubDate} />
                                             </span>
-                                            <h4 class="title">{post.data.title}</h4>
-                                            {/* Show description only on featured post */}
-                                            <p class="description" style="display: none;">{post.data.description}</p>
+                                            <h2 class="title">{post.data.title}</h2>
+                                            <p class="description">{post.data.description}</p>
                                         </div>
                                     </article>
                                 </a>
