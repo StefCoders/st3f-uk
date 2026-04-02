@@ -4,75 +4,93 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
-
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    </head>
-    <body>
-        <Header />
-        
-        <main>
-            <section class="hero-intro">
-                <header>
-                    <p class="eyebrow">st3f.uk</p>
-                    <h1>Stef - developer and radio enthusiast</h1>
-                </header>
-                <div class="bio">
-                    <p>
-                        I’m Stef, based in the UK, originally from Romania. I’m into radio, web development,
-                        streaming infrastructure, and building things from nothing.
-                    </p>
-                </div>
-            </section>
-
-            <hr />
-
-            <section class="expertise" aria-labelledby="expertise-title">
-                <h2 id="expertise-title" class="sr-only">Expertise</h2>
-                <div class="home-grid">
-                    <article class="card">
-                        <h3>Radio</h3>
-                        <p>I run, build and maintain online radio, automation, streaming, and broadcast tools.</p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Code</h3>
-                        <p>I create frontend & backend websites, apps and dashboards for the stuff I run.</p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Projects</h3>
-                        <p>This site is where I’ll post updates, ideas and things I’m working on.</p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="network" aria-labelledby="network-title">
-                <h2 id="network-title">Stuff I run</h2>
-                <nav class="external-links">
-                    <ul>
-                        <li>
-                            <a href="https://moinestifm.ro" target="_blank" rel="noopener noreferrer">
-                                <strong>Moinesti FM</strong> - Radio Station based in Bacau, Romania
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://lrradio.uk" target="_blank" rel="noopener noreferrer">
-                                <strong>London Romanian Radio</strong> - Radio Station based in London, UK
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/blog" class="internal-link">
-                                <strong>Blog</strong> — Thoughts & Technical Writing
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </section>
-        </main>
-
-        <Footer />
-    </body>
+   <head>
+      <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+      <style>
+         .cta-container {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 1.5rem;
+         margin-top: 2rem;
+         }
+         .cta-button {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         padding: 2rem;
+         background: var(--glass-bg);
+         border: 1px solid var(--glass-border);
+         border-radius: 20px;
+         backdrop-filter: blur(15px);
+         text-decoration: none;
+         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+         text-align: center;
+         }
+         .cta-button strong {
+         color: var(--text-bright);
+         font-size: 1.2rem;
+         margin-top: 0.5rem;
+         }
+         .cta-button:hover {
+         border-color: var(--accent);
+         background: rgba(0, 163, 255, 0.1);
+         transform: translateY(-5px);
+         box-shadow: 0 10px 30px -10px var(--accent-glow);
+         }
+         @media (max-width: 600px) {
+         .cta-container { grid-template-columns: 1fr; }
+         }
+      </style>
+   </head>
+   <body>
+      <Header />
+      <main>
+         <section class="hero-intro">
+            <header>
+               <p class="eyebrow">st3f.uk</p>
+               <h1>Stef - developer and radio enthusiast</h1>
+            </header>
+            <div class="bio">
+               <p>
+                  I’m Stef, based in the UK, originally from Romania. I’m into radio, web development,
+                  streaming infrastructure, and building things from nothing.
+               </p>
+            </div>
+         </section>
+         <hr />
+         <section class="expertise" aria-labelledby="expertise-title">
+            <h2 id="expertise-title" class="sr-only">Expertise</h2>
+            <div class="home-grid">
+               <article class="card">
+                  <h3>Radio</h3>
+                  <p>I run, build and maintain online radio, automation, streaming, and broadcast tools.</p>
+               </article>
+               <article class="card">
+                  <h3>Code</h3>
+                  <p>I create frontend & backend websites, apps and dashboards for the stuff I run.</p>
+               </article>
+               <article class="card">
+                  <h3>Projects</h3>
+                  <p>This site is where I’ll post updates, ideas and things I’m working on.</p>
+               </article>
+            </div>
+         </section>
+         <section class="network" aria-labelledby="network-title">
+            <div class="cta-container">
+               <a href="/blog" class="cta-button glass">
+               <span class="eyebrow">Writing</span>
+               <strong>Read the Blog</strong>
+               </a>
+               <a href="/portfolio" class="cta-button glass">
+               <span class="eyebrow">Work</span>
+               <strong>View Portfolio</strong>
+               </a>
+            </div>
+         </section>
+      </main>
+      <Footer />
+   </body>
 </html>
