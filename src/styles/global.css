@@ -1,173 +1,206 @@
 /*
-  Modern Glassmorphism & Flat Dark Theme 
-  Optimized for st3f.uk
+  st3f.uk - Modern Glassmorphism & Flat Dark Theme
+  Integrated Blog & Image Support
 */
 
 :root {
-	--accent: #7c8cff;
-	--accent-glow: rgba(124, 140, 255, 0.3);
-	
-	/* Core Colors - HSL makes transparency easier to manage */
-	--bg: #05070a;
-	--glass-bg: rgba(15, 18, 25, 0.7);
-	--glass-border: rgba(255, 255, 255, 0.08);
-	--glass-highlight: rgba(255, 255, 255, 0.03);
-	
-	--text-main: #d1d5db;
-	--text-bright: #ffffff;
-	--text-muted: #9ca3af;
+    --accent: #7c8cff;
+    --accent-glow: rgba(124, 140, 255, 0.3);
+    
+    /* Core Glass Colors */
+    --bg: #05070a;
+    --glass-bg: rgba(15, 18, 25, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.03);
+    
+    --text-main: #d1d5db;
+    --text-bright: #ffffff;
+    --text-muted: #9ca3af;
 
-	--box-shadow: 
-		0 8px 32px 0 rgba(0, 0, 0, 0.8),
-		0 1px 1px rgba(255, 255, 255, 0.05) inset;
+    --box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.8),
+        0 1px 1px rgba(255, 255, 255, 0.05) inset;
 }
 
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
-	font-display: swap;
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-weight: 400;
+    font-display: swap;
 }
 
+/* 1. Base Setup */
 html {
-	background-color: var(--bg);
-	/* Subtle mesh gradient for depth */
-	background-image: 
-		radial-gradient(at 0% 0%, rgba(124, 140, 255, 0.05) 0px, transparent 50%),
-		radial-gradient(at 100% 0%, rgba(90, 108, 255, 0.03) 0px, transparent 50%);
-	min-height: 100vh;
+    background-color: var(--bg);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(124, 140, 255, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(90, 108, 255, 0.03) 0px, transparent 50%);
+    min-height: 100vh;
 }
 
 body {
-	font-family: "Atkinson", sans-serif;
-	margin: 0;
-	padding: 0;
-	color: var(--text-main);
-	font-size: 18px;
-	line-height: 1.6;
-	-webkit-font-smoothing: antialiased;
+    font-family: "Atkinson", sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-main);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
 main {
-	width: 800px; /* Slightly wider for modern feel */
-	max-width: calc(100% - 3em);
-	margin: auto;
-	padding: 4em 0;
+    width: 800px;
+    max-width: calc(100% - 3em);
+    margin: auto;
+    padding: 4em 0;
 }
 
-/* Typography */
+/* 2. Fluid & Scaled Images Fix */
+img {
+    max-width: 100%;    /* Never wider than parent */
+    height: auto;       /* Maintain aspect ratio */
+    display: block;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--box-shadow);
+    margin: 2rem 0;     /* Space them out in blog posts */
+}
+
+/* 3. Typography */
 h1, h2, h3, h4 {
-	color: var(--text-bright);
-	font-weight: 700;
-	letter-spacing: -0.03em;
+    color: var(--text-bright);
+    font-weight: 700;
+    letter-spacing: -0.03em;
 }
 
-h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+h1 { font-size: 3.5rem; margin-bottom: 0.5rem; line-height: 1.1; }
 h2 { font-size: 1.75rem; margin-top: 3rem; }
 
 .eyebrow {
-	text-transform: uppercase;
-	letter-spacing: 0.2em;
-	font-size: 0.8rem;
-	font-weight: 700;
-	color: var(--accent);
-	margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
 }
 
-/* Glassmorphism Classes */
-.card, .panel, pre, table {
-	background: var(--glass-bg);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
-	border: 1px solid var(--glass-border);
-	border-radius: 20px;
-	box-shadow: var(--box-shadow);
-	transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.card:hover {
-	border-color: rgba(124, 140, 255, 0.3);
-	transform: translateY(-2px);
-}
-
-/* Layout Grid Styles */
-.home-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-	gap: 1.5rem;
-	margin: 3rem 0;
+/* 4. Glass Containers (Cards, Code, Tables) */
+.card, .panel, pre, table, blockquote {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
 }
 
 .card {
-	padding: 1.5rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.card h3 {
-	margin-top: 0;
-	font-size: 1.25rem;
-	color: var(--accent);
+.card:hover {
+    border-color: rgba(124, 140, 255, 0.3);
+    transform: translateY(-4px);
 }
 
-/* Links & Interaction */
+/* 5. The Home Grid */
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.home-grid img {
+    margin: 0 0 1rem 0; /* Tighten image margins inside cards */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* 6. Blog Elements (Prose) */
+.prose p {
+    margin-bottom: 1.8em;
+}
+
+pre {
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85em;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    color: var(--accent);
+}
+
+blockquote {
+    margin: 2rem 0;
+    padding: 1rem 2rem;
+    border-left: 4px solid var(--accent);
+    font-style: italic;
+}
+
+/* 7. Links & Navigation */
 a {
-	color: var(--accent);
-	text-decoration: none;
-	position: relative;
-	transition: color 0.2s ease;
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
-a:not(.card):not(.internal-link):hover {
-	color: var(--text-bright);
-	text-shadow: 0 0 15px var(--accent-glow);
+a:hover {
+    color: var(--text-bright);
 }
 
-/* Network/Work List */
 .external-links ul {
-	list-style: none;
-	padding: 0;
-}
-
-.external-links li {
-	margin-bottom: 1rem;
+    list-style: none;
+    padding: 0;
 }
 
 .external-links a {
-	display: block;
-	padding: 1rem 1.5rem;
-	background: var(--glass-highlight);
-	border: 1px solid var(--glass-border);
-	border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    background: var(--glass-highlight);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
 }
 
 .external-links a:hover {
-	background: rgba(255, 255, 255, 0.05);
-	border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+    transform: translateX(5px);
 }
 
-/* Code & Elements */
-code {
-	font-family: ui-monospace, monospace;
-	font-size: 0.9em;
-	background: rgba(255, 255, 255, 0.05);
-	padding: 0.2em 0.4em;
-	border-radius: 6px;
-}
-
+/* 8. Utilities */
 hr {
-	border: 0;
-	height: 1px;
-	background: linear-gradient(to right, transparent, var(--glass-border), transparent);
-	margin: 4rem 0;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--glass-border), transparent);
+    margin: 4rem 0;
 }
 
-::selection {
-	background: var(--accent);
-	color: var(--bg);
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
-/* Mobile Adjustments */
+/* 9. Responsive */
 @media (max-width: 720px) {
-	h1 { font-size: 2.5rem; }
-	main { padding: 2em 0; }
-	.home-grid { grid-template-columns: 1fr; }
+    body { font-size: 17px; }
+    main { width: 100%; padding: 2em 1.5em; box-sizing: border-box; }
+    h1 { font-size: 2.5rem; }
+    .home-grid { grid-template-columns: 1fr; }
 }
