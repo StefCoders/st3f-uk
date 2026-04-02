@@ -7,57 +7,72 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section class="hero">
-				<p class="eyebrow">st3f.uk</p>
-				<h1>Stef - developer and radio enthusiast</h1>
-			</section>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        
+        <main>
+            <section class="hero-intro">
+                <header>
+                    <p class="eyebrow">st3f.uk</p>
+                    <h1>Stef - developer and radio enthusiast</h1>
+                </header>
+                <div class="bio">
+                    <p>
+                        I’m Stef, based in the UK, originally from Romania. I’m into radio, web development,
+                        streaming infrastructure, and building things from nothing.
+                    </p>
+                </div>
+            </section>
 
-			<section class="home-grid">
-				<div class="card">
-					<h2>Radio</h2>
-					<p>
-						I run, build and maintain online radio, automation, streaming, and broadcast tools.
-					</p>
-				</div>
+            <hr />
 
-				<div class="card">
-					<h2>Code</h2>
-					<p>
-						I create frontend & backend websites, apps and dashboards for the stuff I run.
-					</p>
-				</div>
+            <section class="expertise" aria-labelledby="expertise-title">
+                <h2 id="expertise-title" class="sr-only">Expertise</h2>
+                <div class="home-grid">
+                    <article class="card">
+                        <h3>Radio</h3>
+                        <p>I run, build and maintain online radio, automation, streaming, and broadcast tools.</p>
+                    </article>
 
-				<div class="card">
-					<h2>Projects</h2>
-					<p>
-						This site is where I’ll post updates, ideas, random tests, and things I’m working on.
-					</p>
-				</div>
-			</section>
+                    <article class="card">
+                        <h3>Code</h3>
+                        <p>I create frontend & backend websites, apps and dashboards for the stuff I run.</p>
+                    </article>
 
-			<section class="home-section">
-				<h2>About</h2>
-				<p>
-					I’m Stef, based in the UK, originally from Romania. I’m into radio, web development,
-					streaming infrastructure, and building things from nothing.
-				</p>
-			</section>
+                    <article class="card">
+                        <h3>Projects</h3>
+                        <p>This site is where I’ll post updates, ideas and things I’m working on.</p>
+                    </article>
+                </div>
+            </section>
 
-			<section class="home-section">
-				<h2>Stuff I run</h2>
-				<ul>
-					<li><a href="https://moinestifm.ro" target="_blank" rel="noopener noreferrer">Moinesti FM</a></li>
-					<li><a href="https://lrradio.uk" target="_blank" rel="noopener noreferrer">London Romanian Radio</a></li>
-					<li><a href="/blog">Blog</a></li>
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+            <section class="network" aria-labelledby="network-title">
+                <h2 id="network-title">Stuff I run</h2>
+                <nav class="external-links">
+                    <ul>
+                        <li>
+                            <a href="https://moinestifm.ro" target="_blank" rel="noopener noreferrer">
+                                <strong>Moinesti FM</strong> - Radio Station based in Bacau, Romania
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://lrradio.uk" target="_blank" rel="noopener noreferrer">
+                                <strong>London Romanian Radio</strong> - Radio Station based in London, UK
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/blog" class="internal-link">
+                                <strong>Blog</strong> — Thoughts & Technical Writing
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </main>
+
+        <Footer />
+    </body>
 </html>
