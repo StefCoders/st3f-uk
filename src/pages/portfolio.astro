@@ -1,0 +1,36 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { projects } from '../content/projects';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Portfolio – ${SITE_TITLE}`} description="Projects by Stef" />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<section class="hero">
+				<h1>My Projects</h1>
+				<p class="hero-text">A selection of projects I’ve built or run. Click to explore live.</p>
+			</section>
+
+			<section class="portfolio-grid">
+				{projects.map(project => (
+					<a href={project.url || '#'} target="_blank" rel="noopener noreferrer" class="card">
+						{project.image && <img src={project.image} alt={project.name} />}
+						<h2>{project.name}</h2>
+						<p>{project.description}</p>
+					</a>
+				))}
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
