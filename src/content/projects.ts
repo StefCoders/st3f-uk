@@ -13,12 +13,6 @@ export const projects: Project[] = [
 		image: "https://moinestifm.ro/images/banner.png"
 	},
 	{
-		name: "London Romanian Radio",
-		description: "A station for the Romanian community in London.",
-		url: "https://lrradio.uk",
-		image: "https://lrradio.uk/img/banner.png"
-	},
-	{
 		name: "st3f.uk blog",
 		description: "My personal site for projects, updates, and experiments.",
 		url: "/blog",
