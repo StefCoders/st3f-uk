@@ -1,0 +1,76 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('photography');
+    return posts.map((post) => ({
+        params: { slug: post.id }, 
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// FIX: Handle subdirectories correctly
+const heroImage = post.data.heroImage;
+let imageBase = '';
+
+if (heroImage) {
+    // This looks for the part of the path AFTER /photography/
+    // Example: "/images/photography/jador/1.jpg" becomes "jador/1.jpg"
+    const parts = heroImage.split('/photography/');
+    const relativePath = parts.length > 1 ? parts[1] : '';
+
+    if (relativePath) {
+        // Remove the extension: "jador/1.jpg" -> "jador/1"
+        const cleanPath = relativePath.replace(/\.[^.]+$/, '');
+        imageBase = `/_generated/photography/${cleanPath}`;
+    }
+}
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`${post.data.title} • ${SITE_TITLE}`} description={post.data.description} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <article>
+                <h1>{post.data.title}</h1>
+                <time><FormattedDate date={post.data.pubDate} /></time>
+                
+                {imageBase ? (
+                    <img 
+                        src={`${imageBase}-w1600.jpg`} 
+                        srcset={`
+                            ${imageBase}-w480.jpg 480w, 
+                            ${imageBase}-w800.jpg 800w, 
+                            ${imageBase}-w1200.jpg 1200w, 
+                            ${imageBase}-w1600.jpg 1600w
+                        `} 
+                        sizes="(max-width: 800px) 100vw, 1200px"
+                        alt={post.data.title} 
+                        loading="lazy" 
+                        style="width: 100%; height: auto; display: block; border-radius: 8px;"
+                    />
+                ) : (
+                    /* Fallback if logic fails or heroImage is missing */
+                    heroImage && <img src={heroImage} alt={post.data.title} />
+                )}
+
+                <section>
+                    <Content />
+                </section>
+            </article>
+        </main>
+        <Footer />
+    </body>
+</html>

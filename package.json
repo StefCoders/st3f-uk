@@ -17,7 +17,8 @@
 		"@astrojs/rss": "4.0.14",
 		"@astrojs/sitemap": "3.6.1",
 		"astro": "5.16.9",
-		"typescript": "5.9.3"
+		"typescript": "5.9.3",
+		"sharp": "^0.32.0"
 	},
 	"devDependencies": {
 		"wrangler": "4.56.0"
@@ -28,12 +29,13 @@
 	"private": true,
 	"scripts": {
 		"astro": "astro",
-		"build": "astro build",
+		"generate:photos": "node ./scripts/generate-photos.js",
+		"build": "npm run generate:photos && astro build",
 		"cf-typegen": "wrangler types",
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
-		"preview": "astro build && wrangler dev"
+		"preview": "npm run generate:photos && astro build && wrangler dev"
 	},
 	"type": "module"
 }

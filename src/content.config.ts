@@ -16,4 +16,15 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const photography = defineCollection({
+	loader: glob({ base: "./src/content/photography", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string().optional(),
+		pubDate: z.coerce.date(),
+		heroImage: z.string().optional(),
+		focalPoint: z.string().optional(),
+	}),
+});
+
+export const collections = { blog, photography };

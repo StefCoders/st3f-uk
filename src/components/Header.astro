@@ -11,6 +11,7 @@ import { SITE_TITLE } from '../consts';
         <div class="internal-links">
             <HeaderLink href="/">Home</HeaderLink>
             <HeaderLink href="/blog">Blog</HeaderLink>
+            <HeaderLink href="/photography">Photography</HeaderLink>
             <HeaderLink href="/portfolio">Portfolio</HeaderLink>
         </div>
     </nav>
@@ -20,22 +21,19 @@ import { SITE_TITLE } from '../consts';
     header {
         margin: 0;
         padding: 0;
-        /* Glassmorphism effect */
-        background: rgba(var(--bg-base), 0.7);
+        background: rgba(var(--bg-base), 0.2);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        
         position: sticky;
         top: 0;
         z-index: 100;
-        border-bottom: 1px solid rgb(var(--border-soft));
     }
 
     nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        max-width: 720px; /* Matching your main container width */
+        max-width: 720px;
         margin: 0 auto;
         padding: 0 1em;
     }
@@ -62,7 +60,6 @@ import { SITE_TITLE } from '../consts';
         gap: 0.5rem;
     }
 
-    /* HeaderLink styling */
     nav :global(a) {
         padding: 1.5em 0.75em;
         color: rgb(var(--text-secondary));
